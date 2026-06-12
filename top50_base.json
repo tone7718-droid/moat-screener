@@ -1,0 +1,302 @@
+[
+ {
+  "ticker": "ORLY",
+  "name": "O'Reilly Automotive, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 99.5
+ },
+ {
+  "ticker": "MSCI",
+  "name": "MSCI Inc.",
+  "sector": "Financial Services",
+  "moat_score": 99.4
+ },
+ {
+  "ticker": "ADSK",
+  "name": "Autodesk, Inc.",
+  "sector": "Technology",
+  "moat_score": 99.4
+ },
+ {
+  "ticker": "MCD",
+  "name": "McDonald's Corporation",
+  "sector": "Consumer Cyclical",
+  "moat_score": 99.3
+ },
+ {
+  "ticker": "V",
+  "name": "Visa Inc.",
+  "sector": "Financial Services",
+  "moat_score": 99.3
+ },
+ {
+  "ticker": "GDDY",
+  "name": "GoDaddy Inc.",
+  "sector": "Technology",
+  "moat_score": 99.0
+ },
+ {
+  "ticker": "ABNB",
+  "name": "Airbnb, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 98.9
+ },
+ {
+  "ticker": "ULTA",
+  "name": "Ulta Beauty, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 98.8
+ },
+ {
+  "ticker": "AZO",
+  "name": "AutoZone, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 98.7
+ },
+ {
+  "ticker": "MSFT",
+  "name": "Microsoft Corporation",
+  "sector": "Technology",
+  "moat_score": 98.5
+ },
+ {
+  "ticker": "ROL",
+  "name": "Rollins, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 98.5
+ },
+ {
+  "ticker": "JNJ",
+  "name": "Johnson & Johnson",
+  "sector": "Healthcare",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "KLAC",
+  "name": "KLA Corporation",
+  "sector": "Technology",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "FAST",
+  "name": "Fastenal Company",
+  "sector": "Industrials",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "FDS",
+  "name": "FactSet Research Systems Inc.",
+  "sector": "Financial Services",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "IT",
+  "name": "Gartner, Inc.",
+  "sector": "Technology",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "GWW",
+  "name": "W.W. Grainger, Inc.",
+  "sector": "Industrials",
+  "moat_score": 98.4
+ },
+ {
+  "ticker": "JKHY",
+  "name": "Jack Henry & Associates, Inc.",
+  "sector": "Technology",
+  "moat_score": 98.3
+ },
+ {
+  "ticker": "MRSH",
+  "name": "Marsh",
+  "sector": "Financial Services",
+  "moat_score": 98.0
+ },
+ {
+  "ticker": "GRMN",
+  "name": "Garmin Ltd.",
+  "sector": "Technology",
+  "moat_score": 98.0
+ },
+ {
+  "ticker": "EBAY",
+  "name": "eBay Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 98.0
+ },
+ {
+  "ticker": "CPRT",
+  "name": "Copart, Inc.",
+  "sector": "Industrials",
+  "moat_score": 98.0
+ },
+ {
+  "ticker": "ADBE",
+  "name": "Adobe Inc.",
+  "sector": "Technology",
+  "moat_score": 97.9
+ },
+ {
+  "ticker": "PAYX",
+  "name": "Paychex, Inc.",
+  "sector": "Technology",
+  "moat_score": 97.8
+ },
+ {
+  "ticker": "MA",
+  "name": "Mastercard Incorporated",
+  "sector": "Financial Services",
+  "moat_score": 97.8
+ },
+ {
+  "ticker": "ZTS",
+  "name": "Zoetis Inc.",
+  "sector": "Healthcare",
+  "moat_score": 97.5
+ },
+ {
+  "ticker": "ISRG",
+  "name": "Intuitive Surgical, Inc.",
+  "sector": "Healthcare",
+  "moat_score": 97.3
+ },
+ {
+  "ticker": "IDXX",
+  "name": "IDEXX Laboratories, Inc.",
+  "sector": "Healthcare",
+  "moat_score": 97.2
+ },
+ {
+  "ticker": "FFIV",
+  "name": "F5, Inc.",
+  "sector": "Technology",
+  "moat_score": 97.0
+ },
+ {
+  "ticker": "HCA",
+  "name": "HCA Healthcare, Inc.",
+  "sector": "Healthcare",
+  "moat_score": 96.5
+ },
+ {
+  "ticker": "VRSK",
+  "name": "Verisk Analytics, Inc.",
+  "sector": "Industrials",
+  "moat_score": 96.5
+ },
+ {
+  "ticker": "YUM",
+  "name": "Yum! Brands, Inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 96.4
+ },
+ {
+  "ticker": "REGN",
+  "name": "Regeneron Pharmaceuticals, Inc.",
+  "sector": "Healthcare",
+  "moat_score": 96.3
+ },
+ {
+  "ticker": "AON",
+  "name": "Aon plc",
+  "sector": "Financial Services",
+  "moat_score": 96.3
+ },
+ {
+  "ticker": "ADP",
+  "name": "Automatic Data Processing, Inc.",
+  "sector": "Technology",
+  "moat_score": 96.2
+ },
+ {
+  "ticker": "PEP",
+  "name": "Pepsico, Inc.",
+  "sector": "Consumer Defensive",
+  "moat_score": 96.1
+ },
+ {
+  "ticker": "RMD",
+  "name": "ResMed Inc.",
+  "sector": "Healthcare",
+  "moat_score": 95.9
+ },
+ {
+  "ticker": "META",
+  "name": "Meta Platforms, Inc.",
+  "sector": "Communication Services",
+  "moat_score": 95.7
+ },
+ {
+  "ticker": "AMAT",
+  "name": "Applied Materials, Inc.",
+  "sector": "Technology",
+  "moat_score": 95.7
+ },
+ {
+  "ticker": "CTAS",
+  "name": "Cintas Corporation",
+  "sector": "Industrials",
+  "moat_score": 95.7
+ },
+ {
+  "ticker": "MCO",
+  "name": "Moody's Corporation",
+  "sector": "Financial Services",
+  "moat_score": 95.6
+ },
+ {
+  "ticker": "PM",
+  "name": "Philip Morris International Inc",
+  "sector": "Consumer Defensive",
+  "moat_score": 95.5
+ },
+ {
+  "ticker": "LULU",
+  "name": "lululemon athletica inc.",
+  "sector": "Consumer Cyclical",
+  "moat_score": 95.5
+ },
+ {
+  "ticker": "FICO",
+  "name": "Fair Isaac Corporation",
+  "sector": "Technology",
+  "moat_score": 95.5
+ },
+ {
+  "ticker": "SNA",
+  "name": "Snap-On Incorporated",
+  "sector": "Industrials",
+  "moat_score": 95.5
+ },
+ {
+  "ticker": "CPAY",
+  "name": "Corpay, Inc.",
+  "sector": "Technology",
+  "moat_score": 95.4
+ },
+ {
+  "ticker": "ACN",
+  "name": "Accenture plc",
+  "sector": "Technology",
+  "moat_score": 95.4
+ },
+ {
+  "ticker": "GOOGL",
+  "name": "Alphabet Inc.",
+  "sector": "Communication Services",
+  "moat_score": 95.2
+ },
+ {
+  "ticker": "CL",
+  "name": "Colgate-Palmolive Company",
+  "sector": "Consumer Defensive",
+  "moat_score": 95.1
+ },
+ {
+  "ticker": "CDNS",
+  "name": "Cadence Design Systems, Inc.",
+  "sector": "Technology",
+  "moat_score": 95.1
+ }
+]

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해자 기업 스크리너 — Top 50</title>
+<style>
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --yellow: #d29922; --red: #f85149;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text);
+         font-family: 'Segoe UI', 'Malgun Gothic', sans-serif; line-height: 1.55; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: .85rem; margin-bottom: 16px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .chip { background: var(--card); border: 1px solid var(--border);
+          border-radius: 16px; padding: 4px 12px; font-size: .8rem; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  select, button.sortbtn {
+    background: var(--card); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; font-size: .85rem; cursor: pointer; }
+  button.sortbtn.active { border-color: var(--accent); color: var(--accent); }
+  details.method { background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: .85rem; }
+  details.method summary { cursor: pointer; color: var(--accent); }
+  details.method p { margin-top: 8px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th { text-align: left; color: var(--muted); font-weight: 600; font-size: .75rem;
+       padding: 8px 6px; border-bottom: 1px solid var(--border); }
+  td { padding: 9px 6px; border-bottom: 1px solid var(--border); }
+  tr.row { cursor: pointer; }
+  tr.row:hover { background: #1c2330; }
+  .tk { font-weight: 700; color: var(--accent); }
+  .nm { color: var(--muted); font-size: .78rem; }
+  .bar { background: #21262d; border-radius: 4px; height: 8px; width: 70px;
+         display: inline-block; vertical-align: middle; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 4px; }
+  .badge { border-radius: 4px; padding: 2px 7px; font-size: .73rem; white-space: nowrap; }
+  .g-low { background: rgba(63,185,80,.15); color: var(--green); }
+  .g-mid { background: rgba(210,153,34,.15); color: var(--yellow); }
+  .g-high { background: rgba(248,81,73,.15); color: var(--red); }
+  /* 모달 */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65);
+             z-index: 10; padding: 24px 12px; overflow-y: auto; }
+  .overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+           max-width: 640px; width: 100%; padding: 22px; margin-top: 4vh; }
+  .modal h2 { font-size: 1.2rem; }
+  .modal .sec { color: var(--muted); font-size: .8rem; margin-bottom: 12px; }
+  .scores { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
+  .scorebox { background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+              padding: 10px 16px; text-align: center; }
+  .scorebox b { font-size: 1.4rem; display: block; }
+  .scorebox span { font-size: .72rem; color: var(--muted); }
+  .modal h3 { font-size: .85rem; color: var(--accent); margin: 14px 0 4px; }
+  .modal p { font-size: .88rem; }
+  .metrics { display: flex; gap: 14px; flex-wrap: wrap; font-size: .8rem;
+             color: var(--muted); margin-top: 6px; }
+  .close { float: right; background: none; border: none; color: var(--muted);
+           font-size: 1.3rem; cursor: pointer; }
+  .disclaimer { margin-top: 28px; padding: 12px; border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted); font-size: .75rem; }
+  @media (max-width: 640px) { .hide-m { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>해자 기업 스크리너 <span style="color:var(--accent)">Top 50</span></h1>
+  <div class="sub">S&amp;P500 + 나스닥100 전수 스캔 → 수익성 지속성(해자점수) 상위 50개 → 현재 가격 밸류에이션 채점 · 기준일 <span id="gen"></span></div>
+
+  <div class="chips" id="chips"></div>
+
+  <details class="method">
+    <summary>점수 산정 방법과 근거 보기</summary>
+    <p><b>해자점수 (0~100)</b> — "수익성이 높고 꾸준한가": ROIC 평균 15%↑(30점) + 최악 연도에도 10%↑(20점) + 매출총이익률 40%↑(15점)·안정성(15점) + FCF 흑자 지속(10점) + 무희석(5점)·성장(5점)</p>
+    <p><b>밸류점수 (0~100)</b> — "지금 가격이 합리적인가": FCF수익률 8%↑ 만점(40점, 가격 대비 실제 버는 현금) + EV/EBIT 10배↓ 만점(30점, 영업이익 몇 년치 가격인가) + PEG 1.0↓ 만점(30점, 성장 대비 가격·피터 린치 기준)</p>
+    <p>데이터: Yahoo Finance(최대 4개년). 위대한 기업은 대부분 비싸게 거래됩니다 — '고평가'는 나쁜 기업이 아니라 지금 가격에 안전마진이 없다는 뜻입니다.</p>
+  </details>
+
+  <div class="controls">
+    <button class="sortbtn active" data-k="moat_score">해자점수순</button>
+    <button class="sortbtn" data-k="val_score">밸류점수순</button>
+    <button class="sortbtn" data-k="combo">합산순</button>
+    <select id="secFilter"><option value="">전체 섹터</option></select>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th>#</th><th>기업</th><th class="hide-m">섹터</th>
+      <th>해자</th><th>밸류</th><th>평가</th><th class="hide-m">현재가</th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <div class="disclaimer" id="disc"></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+let DATA = null, sortKey = "moat_score", secFilter = "";
+
+function gradeClass(g){ if(!g) return "g-mid";
+  if(g.startsWith("저평가")) return "g-low";
+  if(g.startsWith("적정")) return "g-mid"; return "g-high"; }
+function barColor(v){ return v>=70?"var(--green)":v>=40?"var(--yellow)":"var(--red)"; }
+
+function render(){
+  const tb = document.getElementById("tbody");
+  let list = DATA.companies.slice();
+  if(secFilter) list = list.filter(c => c.sector === secFilter);
+  list.sort((a,b) => {
+    const va = sortKey==="combo" ? (a.moat_score+(a.val_score||0)) : (a[sortKey]||0);
+    const vb = sortKey==="combo" ? (b.moat_score+(b.val_score||0)) : (b[sortKey]||0);
+    return vb - va;
+  });
+  tb.innerHTML = list.map((c,i) => `
+    <tr class="row" onclick="openModal('${c.ticker}')">
+      <td style="color:var(--muted)">${i+1}</td>
+      <td><span class="tk">${c.ticker}</span><br><span class="nm">${c.name}</span></td>
+      <td class="hide-m" style="font-size:.78rem;color:var(--muted)">${c.sector}</td>
+      <td><b>${c.moat_score}</b></td>
+      <td>${c.val_score==null ? "-" :
+        `<b>${c.val_score}</b> <span class="bar"><i style="width:${c.val_score}%;background:${barColor(c.val_score)}"></i></span>`}</td>
+      <td><span class="badge ${gradeClass(c.val_grade)}">${(c.val_grade||"").replace("(추정)","")}</span></td>
+      <td class="hide-m">${c.price!=null ? "$"+c.price : "-"}</td>
+    </tr>`).join("");
+}
+
+function openModal(tk){
+  const c = DATA.companies.find(x => x.ticker===tk);
+  if(!c) return;
+  const m = document.getElementById("modal");
+  m.innerHTML = `
+    <button class="close" onclick="closeModal()">×</button>
+    <h2>${c.ticker} <span style="font-weight:400;font-size:.9rem;color:var(--muted)">${c.name}</span></h2>
+    <div class="sec">${c.sector} · ${c.moat_type||""}</div>
+    <div class="scores">
+      <div class="scorebox"><b>${c.moat_score}</b><span>해자점수</span></div>
+      <div class="scorebox"><b style="color:${barColor(c.val_score||0)}">${c.val_score??"-"}</b><span>밸류점수</span></div>
+      <div class="scorebox"><b style="font-size:1rem;line-height:2">${(c.val_grade||"").replace("(추정)","")}</b><span>추정 평가</span></div>
+    </div>
+    <h3>비즈니스 모델</h3><p>${c.biz||"-"}</p>
+    <h3>경제적 해자 (Claude 정성 분석)</h3><p>${c.moat||"-"}</p>
+    <h3>핵심 리스크</h3><p>${c.risk||"-"}</p>
+    <h3>밸류에이션 근거</h3><p style="font-size:.82rem">${c.rationale||"-"}</p>
+    <div class="metrics">
+      <span>현재가 ${c.price!=null?"$"+c.price:"-"}</span>
+      <span>FCF수익률 ${c.fcf_yield!=null?(c.fcf_yield*100).toFixed(1)+"%":"-"}</span>
+      <span>EV/EBIT ${c.ev_ebit??"-"}</span>
+      <span>PER ${c.per??"-"}</span>
+      <span>PEG ${c.peg??"-"}</span>
+    </div>`;
+  document.getElementById("overlay").classList.add("open");
+}
+function closeModal(){ document.getElementById("overlay").classList.remove("open"); }
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeModal(); });
+
+fetch("./web_data.json").then(r => r.json()).then(d => {
+  DATA = d;
+  document.getElementById("gen").textContent = d.generated_at;
+  document.getElementById("disc").textContent = d.method.disclaimer +
+    " | 해자점수: " + d.method.moat + " | 밸류점수: " + d.method.valuation;
+  const ok = d.companies.filter(c => c.val_score!=null);
+  const cnt = g => ok.filter(c => (c.val_grade||"").startsWith(g)).length;
+  document.getElementById("chips").innerHTML =
+    `<span class="chip">분석 기업 ${d.companies.length}개</span>
+     <span class="chip" style="color:var(--green)">저평가 가능성 ${cnt("저평가")}</span>
+     <span class="chip" style="color:var(--yellow)">적정 범위 ${cnt("적정")}</span>
+     <span class="chip" style="color:var(--red)">고평가 가능성 ${cnt("고평가")}</span>`;
+  const secs = [...new Set(d.companies.map(c => c.sector))].sort();
+  document.getElementById("secFilter").innerHTML +=
+    secs.map(s => `<option>${s}</option>`).join("");
+  render();
+});
+document.querySelectorAll(".sortbtn").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".sortbtn").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); sortKey = b.dataset.k; render();
+});
+document.getElementById("secFilter").onchange = e => { secFilter = e.target.value; render(); };
+</script>
+</body>
+</html>
